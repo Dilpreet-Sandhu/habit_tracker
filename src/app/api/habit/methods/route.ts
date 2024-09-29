@@ -49,3 +49,30 @@ export async function POST(request : Request,response : Response) {
         return Response.json(new ApiHandler(false,"error while creating habit"),{status:500});
     }
 }
+
+
+export async function GET(request : Request) {
+    await dbConnect();
+    try {
+
+        const session = await getServerSession(authOptions);
+
+        if (!session || !session.user) {
+            return Response.json(new ApiHandler(false,"you are not logged in"),{status:400});
+        }
+
+        const habits = await HabitModel.find();
+
+        if (!habits) {
+            return Response.json(new ApiHandler(false,"please create some habits"),{status:400});
+        }
+
+        return Response.json(new ApiHandler(false,"fetched habits successfully",habits),{status:200});
+
+    } catch (error) {
+        console.log("error while fetching habits",error);
+        return Response.json(new ApiHandler(false,"couldn't fetch habits"),{status:500});
+    }
+}
+
+
