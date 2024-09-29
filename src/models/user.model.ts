@@ -26,6 +26,11 @@ const userSchema : Schema<User> = new Schema<User>({
         type : mongoose.Schema.Types.ObjectId,
         ref : "Habit"
     }],
+    tags : [
+        {
+            type : String
+        }
+    ]
 
 },{timestamps : true});
 
