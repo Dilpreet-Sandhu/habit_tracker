@@ -25,7 +25,7 @@ export async function POST(request : Request) {
         }
 
         habit.isCompleted = true;
-        habit.lastUpdated = new Date(Date.now());
+        habit.lastUpdated = new Date();
         await habit.save({validateBeforeSave: false});
 
         return Response.json(new ApiHandler(true,"habit updated succesfully"),{status:200});
