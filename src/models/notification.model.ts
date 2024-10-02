@@ -1,35 +1,36 @@
-import mongoose,{Schema} from "mongoose";
-
+import mongoose, { model, Model, models, Schema } from "mongoose";
 
 export interface Notification {
-    title : string;
-    user : mongoose.Schema.Types.ObjectId;
-    habit : string;
-    isSent : boolean;
-    sendTime : Date;
-
+  title: string;
+  user: mongoose.Schema.Types.ObjectId;
+  habit: string;
+  isSent: boolean;
+  sendTime: Date;
 }
 
+const notificationSchema: Schema<Notification> =
+  new mongoose.Schema<Notification>({
+    title: {
+      type: String,
+      required: true,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "UserModel",
+    },
+    habit: {
+      type: String,
+      required: true,
+    },
+    isSent: {
+      type: Boolean,
+      default: false,
+    },
+    sendTime: {
+      type: Date,
+    },
+  });
 
-const notificationSchema : Schema<Notification> = new mongoose.Schema<Notification>({
-    title : {
-        type : String,
-        required : true
-    },
-    user : {
-        type : Schema.Types.ObjectId,
-        ref : "UserModel"
-    },
-    habit : {
-        type : String,
-        required : true
-    },
-    isSent : {
-        type : Boolean,
-        default : false
-    },
-    sendTime  : {
-        type : Date
-    }
-
-})
+export const NotificationModel =
+  (models.NotificationModel as Model<Notification>) ||
+  model<Notification>("Notification", notificationSchema);

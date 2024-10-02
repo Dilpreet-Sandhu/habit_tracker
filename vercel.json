@@ -1,0 +1,6 @@
+{
+    "crons" : {
+        "path" : "/api/habit/schedule",
+        "schedule": "15 11 * * *"
+    }
+}

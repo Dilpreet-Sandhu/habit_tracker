@@ -1,6 +1,6 @@
 import { ApiHandler } from "@/lib/apiHandler";
 import dbConnect from "@/lib/dbConnect";
-import { HabitModel } from "@/models/habit.model";
+import { HabitModel } from "@/models/habit";
 
 
 export async function GET(request : Request,{params} : {params : {habitId : string}}) {

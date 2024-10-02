@@ -1,8 +1,10 @@
+
 import { ApiHandler } from "@/lib/apiHandler";
 import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { HabitModel } from "@/models/habit.model";
+import { HabitModel } from "@/models/habit";
+import { StreakModel } from "@/models/streak.model";
 
 
 export async function POST(request : Request) {
@@ -26,7 +28,13 @@ export async function POST(request : Request) {
 
         habit.isCompleted = true;
         habit.lastUpdated = new Date();
-        await habit.save({validateBeforeSave: false});
+        const streak = await StreakModel.updateOne({habit : habitId,user : session.user._id},{
+            $inc : {counter : 1}
+        });
+
+        if (!streak) {
+            console.log("no streak ");
+        }
 
         return Response.json(new ApiHandler(true,"habit updated succesfully"),{status:200});
 

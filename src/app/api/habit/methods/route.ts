@@ -2,7 +2,8 @@ import { ApiHandler } from "@/lib/apiHandler";
 import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { HabitModel } from "@/models/habit.model";
+import { HabitModel } from "@/models/habit";
+import { StreakModel } from "@/models/streak.model";
 
 
 
@@ -38,9 +39,17 @@ export async function POST(request : Request) {
             isCompleted : false,
         }) ;
 
-        if (!newHabit) {
+        const newStreak = await StreakModel.create({
+            habit : newHabit._id,
+            user : user?._id,
+            streak : true,
+            counter : 0,
+        })
+
+        if (!newHabit || !newStreak) {
             return Response.json(new ApiHandler(false,"couldn't create new Habit"),{status:400})
         }
+       
 
         return Response.json(new ApiHandler(true,"succesfully created new Habit"),{status:200});
 
