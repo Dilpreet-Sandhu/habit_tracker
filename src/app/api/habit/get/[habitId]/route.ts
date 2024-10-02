@@ -10,13 +10,13 @@ export async function GET(request : Request,{params} : {params : {habitId : stri
         const habitId = params.habitId;
 
         if (!habitId) {
-            return Response.json(new ApiHandler(false,"please provide habit "),{status:400})
+            return Response.json(new ApiHandler(false,"please provide habit "),{status:400});
         }
 
         const habit = await HabitModel.findById(habitId);
 
         if (!habit) {
-            return Response.json(new ApiHandler(false,"couldn't fetch habit"),{status:400})
+            return Response.json(new ApiHandler(false,"couldn't fetch habit"),{status:400});
         }
 
         return Response.json(new ApiHandler(true,"habit fetched successfully",habit),{status:200});

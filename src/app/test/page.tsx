@@ -5,7 +5,8 @@ import React from 'react'
 export default function page() {
 
     async function sendApiRequst() : Promise<void> {
-        axios.get("/api/habit/methods").then((data) => console.log(data));
+      const res = await axios.get("/api/habit/methods");
+      console.log(res.data);
     }
   return (
     <div>

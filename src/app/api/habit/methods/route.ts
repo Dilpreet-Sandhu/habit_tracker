@@ -3,22 +3,22 @@ import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { HabitModel } from "@/models/habit.model";
-import { getSession } from "next-auth/react";
 
 
 
 
-export async function POST(request : Request,response : Response) {
+
+export async function POST(request : Request) {
     await dbConnect();
     try {
-        console.log(request.headers);
+ 
         const {title,description,frequency,difficulty,reminder} = await request.json();
         const session = await getServerSession(authOptions);
 
-        console.log(session);
+    
 
         if (!session || !session.user) {
-            return Response.json(new ApiHandler(false,"you are not logged in"),{status:400})
+            return Response.json(new ApiHandler(false,"you are not logged in"),{status:400});
         }
         const user = session?.user;
 
@@ -67,7 +67,7 @@ export async function GET(request : Request) {
             return Response.json(new ApiHandler(false,"please create some habits"),{status:400});
         }
 
-        return Response.json(new ApiHandler(false,"fetched habits successfully",habits),{status:200});
+        return Response.json(new ApiHandler(true,"fetched habits successfully",habits),{status:200});
 
     } catch (error) {
         console.log("error while fetching habits",error);
