@@ -70,7 +70,7 @@ export async function GET(request : Request) {
             return Response.json(new ApiHandler(false,"you are not logged in"),{status:400});
         }
 
-        const habits = await HabitModel.find();
+        const habits = await HabitModel.find({user : session.user._id});
 
         if (!habits) {
             return Response.json(new ApiHandler(false,"please create some habits"),{status:400});
