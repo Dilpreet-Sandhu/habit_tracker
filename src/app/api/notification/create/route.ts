@@ -2,6 +2,8 @@ import { ApiHandler } from "@/lib/apiHandler";
 import dbConnect from "@/lib/dbConnect";
 import { HabitModel } from "@/models/habit";
 import { NotificationModel } from "@/models/notification.model";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/options";
 
 
 export async function POST(request : Request) {
@@ -9,6 +11,8 @@ export async function POST(request : Request) {
     try {
 
         const {habitId} = await request.json();
+
+        const session = await getServerSession(authOptions);
 
         const habit = await HabitModel.findById(habitId);
 
@@ -20,9 +24,10 @@ export async function POST(request : Request) {
 
         const notification = await NotificationModel.create({
             title,
+            user : session?.user._id,
             habit : habit._id,
             isSent : false,
-            sendTime : habit.reminder.toISOString(),
+            sendTime : habit.reminder,
         });
 
 
