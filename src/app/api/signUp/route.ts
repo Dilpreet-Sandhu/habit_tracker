@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 export async function POST(request: Request) {
   await dbConnect();
   try {
-    const { username, email, password, tags } = await request.json();
+    const { username, email, password } = await request.json();
 
     const existingUser = await UserModel.findOne({ username });
 
@@ -22,7 +22,6 @@ export async function POST(request: Request) {
       username,
       email,
       password: hashedPassword,
-      tags,
     });
 
     if (newUser) {

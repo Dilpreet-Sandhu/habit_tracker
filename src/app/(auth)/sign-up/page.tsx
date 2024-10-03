@@ -7,7 +7,12 @@ import Link from "next/link";
 import {useDebounceCallback} from 'usehooks-ts';
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
-import { IconLoader2 } from "@tabler/icons-react";
+import {ArrowBigLeft, ArrowDownRight, ArrowUpNarrowWide, ArrowUpRight, Loader, Loader2, LoaderCircle} from 'lucide-react';
+import { ResponseHandler } from "@/lib/ApiResponseHandler";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { BottomGradient } from "@/components/BottomGradient";
+
 
 export default function Page() {
 
@@ -19,8 +24,9 @@ export default function Page() {
 
 
     const debouncedValue = useDebounceCallback(setUsernameToBeChecked,500);
+    const router = useRouter();
 
-    console.log(usernameToBeChecked);
+
 
 
     useEffect(() => {
@@ -51,6 +57,38 @@ export default function Page() {
 
 
     async function onSubmit(e : React.FormEvent<HTMLFormElement>) {
+
+      e.preventDefault();
+
+      const form = new FormData(e.currentTarget);
+
+      const username = form.get("username");
+      const email = form.get("email");
+      const password = form.get("password");
+
+      const data = {
+        username,
+        email,
+        password
+      }
+      
+      try {
+        setIsSubmitting(true);
+
+        const res = await axios.post("/api/signUp",data);
+
+        ResponseHandler(res);
+
+        router.push("/login");
+
+
+      } catch (error) {
+        console.log("error while signing up user: ",error);
+        toast("error while signing up user",{type : "error"});
+      }finally {
+        setIsSubmitting(false);
+      }
+
 
     }
 
@@ -85,7 +123,7 @@ export default function Page() {
                 }}
               />
               {
-                isUsernameChecking && <IconLoader2/>
+                isUsernameChecking && <Loader/>
               }
             <Label htmlFor="username" className={usernameMessage == "username is available" ? "text-green-500" : "text-red-500"}>{usernameMessage ?? usernameMessage }</Label>
 
@@ -114,7 +152,10 @@ export default function Page() {
               />
             </LabelInputContainer>
 
-            <button type="submit" className="bg-black py-3 rounded-md mt-3 px-10 text-white">Sign Up</button>
+            <button disabled={isSubmitting} type="submit" className="bg-black py-3 flex items-center justify-center gap-3 rounded-md mt-3 px-10 text-white">
+              Sign Up <ArrowUpRight/>
+                <BottomGradient/>
+              </button>
           </form>
         </CardContent>
       </Card>

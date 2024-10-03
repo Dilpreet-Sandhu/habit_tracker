@@ -37,7 +37,6 @@ export async function GET(request : Request) {
         const existingUser = await UserModel.findOne({username});
 
         if (existingUser) {
-            console.log(existingUser);
             return Response.json(new ApiHandler(true,"username is already taken"),{status:200})
         }
 
