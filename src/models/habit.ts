@@ -10,7 +10,8 @@ export interface Habit extends Document {
     difficulty : "easy" | "medium" | "hard";
     reminder : Date;
     lastUpdated : Date;
-    isCompleted : boolean
+    isCompleted : boolean,
+    tag : string,
 }
 
 
@@ -44,6 +45,10 @@ const habitSchema : Schema<Habit> = new Schema<Habit>({
     isCompleted : {
         type : Boolean,
         default : false
+    },
+    tag :{
+        type : String,
+        required : [true,"tag is required"]
     }
 });
 

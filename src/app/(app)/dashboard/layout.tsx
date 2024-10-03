@@ -10,7 +10,7 @@ export const metaData : Metadata = {
 
 
 export default function RootLayout({children}  :{children : ReactNode}) {
-    return <div>
+    return <div className="w-full min-h-screen">
         <Header/>
         {children}
     </div>
