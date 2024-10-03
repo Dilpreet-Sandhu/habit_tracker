@@ -47,11 +47,11 @@ mongoose.connect('mongodb+srv://habitTracker:HrtoZu6Mte03qtpY@habittracker.zc50g
     
 })
 
-cron.schedule("46 3 * * *",async () => {
+cron.schedule("0 0 * * *",async () => {
     console.log("starting the job");
 
     const habit = await HabitModel.updateMany({},{
-        isCompleted : true,
+        isCompleted : false ,
         lastUpdated : new Date()
     });
 

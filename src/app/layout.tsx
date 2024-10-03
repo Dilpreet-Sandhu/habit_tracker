@@ -1,8 +1,9 @@
+import AuthProvider from "@/context/SessionProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import AuthProvider from "@/context/SessionProvider";
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,6 +34,7 @@ export default function RootLayout({
         >
           {children}
         </body>
+        <ToastContainer/>
       </AuthProvider>
     </html>
   );
