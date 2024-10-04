@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { navLinks } from "@/lib/helper";
-import { BellIcon, Calendar, LogIn, ToggleRightIcon, User } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { BellIcon, Calendar, LogIn, LogOut, ToggleRightIcon, User } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Header() {
 
@@ -38,7 +38,15 @@ export default function Header() {
           aria-description="user"
           className="ml-2 cursor-pointer"
         >
-        {session?.user ? <User/> : <LogIn/>}
+       <User/> 
+        </div>
+        <div
+          aria-label="user"
+          aria-description="user"
+          className="ml-2 cursor-pointer"
+          onClick={() => signOut()}
+        >
+       <LogOut/> 
         </div>
       </div>
     </div>

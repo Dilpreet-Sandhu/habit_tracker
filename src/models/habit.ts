@@ -11,7 +11,7 @@ export interface Habit extends Document {
     reminder : Date;
     lastUpdated : Date;
     isCompleted : boolean,
-    tag : string,
+
 }
 
 
@@ -46,10 +46,7 @@ const habitSchema : Schema<Habit> = new Schema<Habit>({
         type : Boolean,
         default : false
     },
-    tag :{
-        type : String,
-        required : [true,"tag is required"]
-    }
+  
 });
 
 
