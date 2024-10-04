@@ -76,7 +76,7 @@ export function CreateHabit() {
   return (
     <div className="flex items-center justify-center">
       <Modal>
-        <ModalTrigger className="bg-white text-xl font-bold px-20 py-4 text-black flex justify-center group/modal-btn">
+        <ModalTrigger className="bg-white border-black border-[2px] text-xl font-bold px-20 py-4 text-black flex justify-center group/modal-btn">
           <span className="flex item-center justify-center gap-2  text-center transition duration-500">
             Create a Habit <ArrowUpRight className="mt-1"/>
           </span>
@@ -106,10 +106,10 @@ export function CreateHabit() {
                 <button onClick={() => setHabitData({...habitData,difficulty : "easy"})} className={` px-7 hover:bg-green-300 ${habitData.difficulty === "easy" && "bg-green-500"} transition-all duration-500 py-2 rounded-md border-black outline-0 border-[2px] `}>
                   easy
                 </button>
-                <button onClick={() => setHabitData({...habitData,difficulty : "medium"})} className={`bg-transparent px-7 hover:hover:bg-blue-300 ${habitData.difficulty == "medium" && "bg-blue-500"} py-2 rounded-md border-black outline-0 border-[2px] `}>
+                <button onClick={() => setHabitData({...habitData,difficulty : "medium"})} className={` px-7 hover:hover:bg-blue-300 ${habitData.difficulty == "medium" && "bg-blue-500"} py-2 rounded-md border-black outline-0 border-[2px] `}>
                   medium
                 </button>
-                <button onClick={() => setHabitData({...habitData,difficulty : "hard"})} className={`bg-transparent px-7 hover:bg-red-300 py-2 ${habitData.difficulty == "hard" && "bg-red-500"} rounded-md border-black outline-0 border-[2px] `}>
+                <button onClick={() => setHabitData({...habitData,difficulty : "hard"})} className={` px-7 hover:bg-red-300 py-2 ${habitData.difficulty == "hard" && "bg-red-500"} rounded-md border-black outline-0 border-[2px] `}>
                   difficult
                 </button>
                 </div>
@@ -119,7 +119,7 @@ export function CreateHabit() {
               <div className="w-full h-10 flex gap-2 mt-7 flex-col">
                 <Label>Reset reminder </Label>
                 <div className="flex  text-base font-bold gap-4">
-                <button onClick={() => setHabitData({...habitData,frequency : "daily"})} className={`bg-transparent px-7 hover:bg-blue-300 ${habitData.frequency === "daily" && "bg-blue-500"} transition-all duration-500 py-2 rounded-md border-black outline-0 border-[2px]`}>
+                <button onClick={() => setHabitData({...habitData,frequency : "daily"})} className={` px-7 hover:bg-blue-300 ${habitData.frequency === "daily" && "bg-blue-500"} transition-all duration-500 py-2 rounded-md border-black outline-0 border-[2px]`}>
                   daily
                 </button>
                 <button onClick={() => setHabitData({...habitData,frequency : "weekly"})} className={` px-7 hover:hover:bg-green-300 ${habitData.frequency === "weekly" && "bg-green-500"} py-2 rounded-md border-black outline-0 border-[2px] `}>

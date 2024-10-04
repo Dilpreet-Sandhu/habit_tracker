@@ -11,10 +11,12 @@ export interface Streak extends Document {
 const streakSchema : Schema<Streak> = new Schema<Streak>({
     habit : {
         type : mongoose.Schema.Types.ObjectId,
+        ref : "HabitModel",
         required : true,
     },
     user : {
         type : mongoose.Schema.Types.ObjectId,
+        ref : "UserModel",
         required : true
     },
     streak : {

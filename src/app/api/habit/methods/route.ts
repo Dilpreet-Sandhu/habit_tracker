@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { HabitModel } from "@/models/habit";
 import { StreakModel } from "@/models/streak.model";
+import { revalidatePath } from "next/cache";
 
 
 
@@ -49,7 +50,9 @@ export async function POST(request : Request) {
         if (!newHabit || !newStreak) {
             return Response.json(new ApiHandler(false,"couldn't create new Habit"),{status:400})
         }
-       
+        
+        revalidatePath("/api/habit/get");
+        revalidatePath("/api/streak/get");
 
         return Response.json(new ApiHandler(true,"succesfully created new Habit"),{status:200});
 
@@ -60,28 +63,5 @@ export async function POST(request : Request) {
 }
 
 
-export async function GET(request : Request) {
-    await dbConnect();
-    try {
-
-        const session = await getServerSession(authOptions);
-
-        if (!session || !session.user) {
-            return Response.json(new ApiHandler(false,"you are not logged in"),{status:400});
-        }
-
-        const habits = await HabitModel.find({user : session.user._id});
-
-        if (!habits) {
-            return Response.json(new ApiHandler(false,"please create some habits"),{status:400});
-        }
-
-        return Response.json(new ApiHandler(true,"fetched habits successfully",habits),{status:200});
-
-    } catch (error) {
-        console.log("error while fetching habits",error);
-        return Response.json(new ApiHandler(false,"couldn't fetch habits"),{status:500});
-    }
-}
 
 

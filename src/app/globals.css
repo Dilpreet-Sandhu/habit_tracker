@@ -66,4 +66,11 @@
   body {
     @apply bg-background text-foreground;
   }
+
+}
+
+@layer utilities {
+   .bold-text {
+     @apply text-black mt-4 font-bold text-2xl 
+   }
 }
