@@ -73,4 +73,7 @@
    .bold-text {
      @apply text-black mt-4 font-bold text-2xl 
    }
+   .background {
+     @apply bg-[#FFF7D1]
+   }
 }

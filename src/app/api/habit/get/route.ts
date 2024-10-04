@@ -19,6 +19,7 @@ export async function GET(request : Request) {
         if (!habits) {
             return Response.json(new ApiHandler(false,"please create some habits"),{status:400});
         }
+     
 
         return Response.json(new ApiHandler(true,"fetched habits successfully",habits),{status:200});
 

@@ -48,7 +48,7 @@ export default function Page() {
               key={idx}
               className="bg-zinc-500 border-black border-[2px] w-[14vw] h-[10vh] flex flex-col items-start mt-4 rounded-md justify-center px-2"
             >
-              <p className="text-white text-xl font-semibold mb-1 ">
+              <p className="text-white text-[1.3vw] text-nowrap font-semibold mb-1 ">
                 {streak?.habit?.title}
               </p>
               <div className="flex">
