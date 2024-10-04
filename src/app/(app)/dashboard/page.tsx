@@ -46,8 +46,10 @@ export default function Page() {
               whileInView={{opacity : '1',x : "0"}}
               transition={{delay : idx * 0.1}}
               key={idx}
-              className="bg-zinc-500 border-black border-[2px] w-[14vw] h-[10vh] flex flex-col items-start mt-4 rounded-md justify-center px-2"
+              className="bg-zinc-500 border-black border-[2px] w-[14vw] h-[10vh] flex items-center mt-4 rounded-md justify-start px-2"
             >
+              <div className="flex flex-1 flex-col">
+
               <p className="text-white text-[1.3vw] text-nowrap font-semibold mb-1 ">
                 {streak?.habit?.title}
               </p>
@@ -59,6 +61,11 @@ export default function Page() {
                   ? "😩"
                   : "😊"}
               </div>
+              </div>
+              <div className="w-9 h-full justify-center items-center flex flex-col gap-2">
+                <span>🔥</span>
+                  <p>{streak?.counter}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -69,7 +76,7 @@ export default function Page() {
 
        <Habits/>
 
-      <div className="absolute bottom-5 left-0 right-0 flex  justify-center">
+      <div className="fixed bottom-5 left-0 right-0 flex  justify-center">
         <CreateHabit />
       </div>
     </main>

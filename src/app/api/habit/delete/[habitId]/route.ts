@@ -1,6 +1,7 @@
 import { ApiHandler } from "@/lib/apiHandler";
 import dbConnect from "@/lib/dbConnect";
 import { HabitModel } from "@/models/habit";
+import { StreakModel } from "@/models/streak.model";
 
 export async function DELETE(request : Request,{params} : {params : {habitId : string}}) {
     await dbConnect();
@@ -12,8 +13,9 @@ export async function DELETE(request : Request,{params} : {params : {habitId : s
         }
 
         const deletedHabit = await HabitModel.deleteOne({_id : habitId});
+        const deleteStreak = await StreakModel.deleteOne({habit : habitId});
 
-        if (!deletedHabit) {
+        if (!deletedHabit || !deleteStreak) {
             return Response.json(new ApiHandler(false,"couldn't delte habit"),{status : 400});
         }
 

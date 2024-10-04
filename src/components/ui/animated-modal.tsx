@@ -10,6 +10,7 @@ import React, {
   useState,
 } from "react";
 
+
 interface ModalContextType {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -48,7 +49,9 @@ export const ModalTrigger = ({
 }) => {
   const { setOpen } = useModal();
   return (
-    <button
+    <motion.button
+      initial={{opacity : 0,y : "-40%"}}
+      whileInView={{opacity : 1,y : "0%"}}
       className={cn(
         "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
         className
@@ -56,7 +59,7 @@ export const ModalTrigger = ({
       onClick={() => setOpen(true)}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
 

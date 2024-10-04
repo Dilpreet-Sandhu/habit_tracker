@@ -74,6 +74,18 @@
      @apply text-black mt-4 font-bold text-2xl 
    }
    .background {
-     @apply bg-[#FFF7D1]
+     @apply bg-[#FAF7F0]
+   }
+   .border-dark {
+     @apply border-[#4A4947]
+   }
+   .dark-text {
+    @apply text-[#B17457] font-bold text-[16px]
+   }
+   .dark-p-text {
+    @apply text-[#4A4947] font-medium text-[15px] text-pretty
+   }
+   .badge {
+    @apply w-[50px] flex items-center justify-center h-[30px] px-9 rounded-md border-[2px] bg-white border-dark
    }
 }
