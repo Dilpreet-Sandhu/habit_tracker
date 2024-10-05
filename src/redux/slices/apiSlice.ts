@@ -32,11 +32,27 @@ export const apiSlice = createApi({
                 body : habitData,
             }),
             invalidatesTags : ["habits","streaks"]
+        }),
+        deleteHabit : builder.mutation<any,any>({
+            query  : (habitId) => ({
+                url : `/habit/delete/${habitId}`,
+                method: "DELETE",
+            })  ,
+            invalidatesTags : ["habits","streaks"]
+        }),
+        updateHabit : builder.mutation<any,any>({
+            query : (habitId) => ({
+                url : "/habit/comp",
+                body : {habitId},
+                method : "POST"
+            }),
+            invalidatesTags : ["habits","streaks"]
         })
-    })
+    }),
+    
 
 })
 
 
-export const {useLazyGetHabitsQuery,useGetHabitsQuery,useCreatHabitMutation,useGetStreaksQuery} = apiSlice;
+export const {useLazyGetHabitsQuery,useGetHabitsQuery,useCreatHabitMutation,useGetStreaksQuery,useDeleteHabitMutation,useUpdateHabitMutation} = apiSlice;
 export type mutationHookType = ReturnType<typeof useCreatHabitMutation>;

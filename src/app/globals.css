@@ -70,6 +70,14 @@
 }
 
 @layer utilities {
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
    .bold-text {
      @apply text-black mt-4 font-bold text-2xl 
    }
@@ -88,4 +96,8 @@
    .badge {
     @apply w-[50px] flex items-center justify-center h-[30px] px-9 rounded-md border-[2px] bg-white border-dark
    }
+}
+
+.btn-animation {
+    animation : button 0.5s linear
 }

@@ -8,7 +8,7 @@ import { Check } from "lucide-react";
 import type { Habit } from "@/models/habit";
 import { motion } from "framer-motion";
 
-import { useGetHabitsQuery, useLazyGetHabitsQuery } from "@/redux/slices/apiSlice";
+import { useDeleteHabitMutation, useGetHabitsQuery, useLazyGetHabitsQuery, useUpdateHabitMutation } from "@/redux/slices/apiSlice";
 
 export default function Habits() {
   
@@ -20,7 +20,7 @@ export default function Habits() {
 
 
   return (
-    <div className="w-full bg-green-500 h-fit mt-16 pt-5">
+    <div className="w-full  h-full mt-16 pt-5">
       <h1 className="bold-text">Uncompleted Habits</h1>
 
       {/* habits */}
@@ -52,13 +52,16 @@ export default function Habits() {
 
 const Habit = ({ habit }: { habit: Habit }) => {
 
+  const [deleteHabit] = useDeleteHabitMutation();
+  const [updateHabit]  = useUpdateHabitMutation();
+
 
   async function handleDeleteHabit() {
     try {
 
-      const res = await axios.delete(`/api/habit/delete/${habit?._id}`);
+      const res = await deleteHabit(habit._id);
 
-      if (res.status == 200) {
+      if (res.data.success) {
         toast(res.data.message,{type : "success"});
       }else {
         toast(res.data.message,{type : "error"});
@@ -74,9 +77,9 @@ const Habit = ({ habit }: { habit: Habit }) => {
   async function handleHabitComplete() {
     try {
 
-      const res = await axios.post("/api/habit/comp",{habitId : habit?._id});
+      const res = await updateHabit(habit._id);
 
-      if (res.status == 200) {
+      if (res.data.success) {
         toast(res.data.message,{type : "success"})
       }else {
         toast(res.data.message,{type : "error"})

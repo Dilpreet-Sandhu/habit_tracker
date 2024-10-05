@@ -4,7 +4,7 @@ import axios from "axios";
 import { UploadIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { ArrowUpRight } from "lucide-react";
 import { CreateHabit } from "@/components/models/AnimatedModel";
@@ -13,45 +13,34 @@ import Habits from "@/components/specific/Habits";
 import { useGetStreaksQuery } from "@/redux/slices/apiSlice";
 import { Streak } from "@/models/streak.model";
 import { Skeleton } from "@/components/ui/skeleton";
+import EditDialog from "@/components/dashboard/EditDialog";
+import { useAppSelector } from "@/redux/store";
+
 
 export default function Page() {
-  const [streaks, setStreaks] = useState<any[]>([]);
-  const {data,isLoading} = useGetStreaksQuery();
 
+  const {data,isLoading} = useGetStreaksQuery();
   const streakData = data?.data as any[];
 
-  useEffect(() => {
-    async function fetchStreaks() {
-      try {
-        const res = await axios.get("/api/streak/get");
 
-        if (res.data) {
-          setStreaks(res.data?.data);
-        }
-      } catch (error) {
-        console.error("error while fetching streaks: ", error);
-        toast("error whle fetching streaks ", { type: "error" });
-      }
-    }
-    fetchStreaks();
-  }, []);
+  const {editDialog} = useAppSelector(state => state.misc);
 
- 
-
+  console.log(editDialog);
+  
   return (
     <main className="w-full px-20  min-h-[91vh] max-h-fit ">
       <div className="w-full h-20 py-2">
         <h1 className="bold-text">Your streaks</h1>
 
       {/* streaks section */}
-        <div className="w-full flex  gap-4  h-fit px-2  " id="streaks">
+        <div className="w-full flex overflow-x-scroll overflow-y-visible scrollbar-hidden  gap-4  h-fit px-2  " id="streaks">
           {!isLoading ? streakData.map((streak, idx) => (
             <motion.div
-              initial={{opacity :"0",x : "-40%"}}
-              whileInView={{opacity : '1',x : "0"}}
+              initial={{opacity :0,x : "-40%"}}
+              whileInView={{opacity : 1,x : "0"}}
               transition={{delay : idx * 0.1}}
               key={idx}
-              className="bg-zinc-500 border-black border-[2px] w-[14vw] h-[10vh] flex items-center mt-4 rounded-md justify-start px-2"
+              className="bg-zinc-500 border-black border-[2px] w-[14vw] h-[10vh] flex flex-shrink-0 items-center mt-4 rounded-md justify-start px-2"
             >
               <div className="flex flex-1 flex-col">
 
@@ -78,9 +67,13 @@ export default function Page() {
 
        <Habits/>
 
-      <div className="fixed bottom-5 left-0 right-0 flex  justify-center">
+      <div id="bottomBtn" className="fixed bottom-5 h-[5vh] left-0 right-0 flex  justify-center">
         <CreateHabit />
       </div>
+
+      {
+        editDialog ? <EditDialog/> : null
+      }
     </main>
   );
 }

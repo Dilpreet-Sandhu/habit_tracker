@@ -3,10 +3,13 @@ import React from "react";
 import { navLinks } from "@/lib/helper";
 import { BellIcon, Calendar, LogIn, LogOut, ToggleRightIcon, User } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { setEditDialogOpen } from "@/redux/slices/slice";
 
 export default function Header() {
 
   const {data : session} = useSession();
+  const dispath = useDispatch();
 
   return (
     <div className="w-full h-16 border-b-[2px] flex items-center justify-between px-5 border-black">
@@ -37,6 +40,7 @@ export default function Header() {
           aria-label="user"
           aria-description="user"
           className="ml-2 cursor-pointer"
+          onClick={() => dispath(setEditDialogOpen())}
         >
        <User/> 
         </div>
