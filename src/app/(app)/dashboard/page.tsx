@@ -25,7 +25,7 @@ export default function Page() {
 
   const {editDialog} = useAppSelector(state => state.misc);
 
-  console.log(editDialog);
+  
   
   return (
     <main className="w-full px-20  min-h-[91vh] max-h-fit ">

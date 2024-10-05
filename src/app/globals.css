@@ -96,6 +96,13 @@
    .badge {
     @apply w-[50px] flex items-center justify-center h-[30px] px-9 rounded-md border-[2px] bg-white border-dark
    }
+   .button {
+    @apply bg-black border-white border-[2px] px-7 py-2 rounded-md text-white mx-5
+   }
+   .border-btn {
+    @apply  border-black border-[2px] px-5 py-2 rounded-md text-black
+
+   }
 }
 
 .btn-animation {
