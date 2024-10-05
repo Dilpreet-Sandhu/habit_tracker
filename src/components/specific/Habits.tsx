@@ -11,41 +11,16 @@ import { motion } from "framer-motion";
 import { useGetHabitsQuery, useLazyGetHabitsQuery } from "@/redux/slices/apiSlice";
 
 export default function Habits() {
-  const [habits, setHabits] = useState<Habit[]>([]);
-  const [newHabits,setNewHabits] = useState<Habit[]>([]);
-  const [loading, setLoading] = useState(false);
-  const {data,error,isLoading} = useGetHabitsQuery();
+  
+  const {data : unCompletedHabits,isLoading} = useGetHabitsQuery();
+  const {data : completedHabits,isLoading : newLoading} = useGetHabitsQuery(true);
 
-  const habitData = data?.data as Habit[];
+  const habitData = unCompletedHabits?.data as Habit[];
+  const newHabitData = completedHabits?.data as Habit[];
 
- 
-
-  useEffect(() => {
-    async function fetchHabits() {
-      try {
-
-        const res = await axios.get("/api/habit/get");
-        if (res?.data) {
-          setHabits(res?.data?.data);
-        }
-        const response = await axios.get("/api/habit/get?completed=true");
-
-        if (response.data) {
-          setNewHabits(response?.data?.data);
-        }
-
-      } catch (error) {
-        console.log("error while fetching habits: ", error);
-        toast("error while fetching habits", { type: "error" });
-      } 
-    }
-    fetchHabits();
-  }, []);
-
- 
 
   return (
-    <div className="w-full h-full mt-16 pt-5">
+    <div className="w-full bg-green-500 h-fit mt-16 pt-5">
       <h1 className="bold-text">Uncompleted Habits</h1>
 
       {/* habits */}
@@ -53,20 +28,20 @@ export default function Habits() {
         <Skeleton />
       ) : (
         <div className="flex flex-wrap gap-5 mt-5">
-          {habits?.map((habit,idx) => (
+          {habitData ? habitData?.map((habit,idx) => (
             <Habit key={idx}  habit={habit} />
-          ))}
+          )) : <h1 className="text-xl font-semibold text-black my-3">No Uncompleted habits</h1>}
         </div>
       )}
 
       <h1 className="bold-text mt-5">Complited Habits</h1>
 
       {/* habits */}
-      {loading ? (
+      {isLoading ? (
         <Skeleton />
       ) : (
         <div className="flex flex-wrap gap-5 mt-5">
-          {newHabits?.map((habit,idx) => (
+          {newHabitData?.map((habit,idx) => (
             <Habit key={idx} habit={habit} />
           ))}
         </div>
@@ -94,12 +69,12 @@ const Habit = ({ habit }: { habit: Habit }) => {
       toast("error while deleting habit",{type : "error"});
     }
   }
-  console.log(habit);
+
 
   async function handleHabitComplete() {
     try {
 
-      const res = await axios.post("/api/habit/comp",{habitId : habit._id});
+      const res = await axios.post("/api/habit/comp",{habitId : habit?._id});
 
       if (res.status == 200) {
         toast(res.data.message,{type : "success"})

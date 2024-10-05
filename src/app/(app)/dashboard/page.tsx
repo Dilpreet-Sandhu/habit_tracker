@@ -10,9 +10,15 @@ import { ArrowUpRight } from "lucide-react";
 import { CreateHabit } from "@/components/models/AnimatedModel";
 import { motion } from "framer-motion";
 import Habits from "@/components/specific/Habits";
+import { useGetStreaksQuery } from "@/redux/slices/apiSlice";
+import { Streak } from "@/models/streak.model";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Page() {
   const [streaks, setStreaks] = useState<any[]>([]);
+  const {data,isLoading} = useGetStreaksQuery();
+
+  const streakData = data?.data as any[];
 
   useEffect(() => {
     async function fetchStreaks() {
@@ -33,14 +39,13 @@ export default function Page() {
  
 
   return (
-    <main className="w-full px-20  h-[91vh] ">
+    <main className="w-full px-20  min-h-[91vh] max-h-fit ">
       <div className="w-full h-20 py-2">
         <h1 className="bold-text">Your streaks</h1>
 
-
       {/* streaks section */}
-        <div className="w-full flex gap-4  h-[15vh] px-2  " id="streaks">
-          {streaks.map((streak, idx) => (
+        <div className="w-full flex  gap-4  h-fit px-2  " id="streaks">
+          {!isLoading ? streakData.map((streak, idx) => (
             <motion.div
               initial={{opacity :"0",x : "-40%"}}
               whileInView={{opacity : '1',x : "0"}}
@@ -67,11 +72,8 @@ export default function Page() {
                   <p>{streak?.counter}</p>
               </div>
             </motion.div>
-          ))}
+          )) : <Skeleton/>}
         </div>
-
-
-
       </div>
 
        <Habits/>

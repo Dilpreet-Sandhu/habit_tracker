@@ -21,14 +21,15 @@ export async function POST(request : Request) {
             return Response.json(new ApiHandler(false,"you should be logged in to perform this action"),{status:400});
         }
 
-        const habit = await HabitModel.findById(habitId);
+        const habit = await HabitModel.findByIdAndUpdate(habitId,{
+            isCompleted :true,
+            lastUpdated : new Date()
+        },{new :true});
 
         if (!habit) {
             return Response.json(new ApiHandler(false,"not habit found for the given id"),{status:400});
         }
 
-        habit.isCompleted = true;
-        habit.lastUpdated = new Date();
         const streak = await StreakModel.updateOne({habit : habitId,user : session.user._id},{
             $inc : {counter : 1}
         });

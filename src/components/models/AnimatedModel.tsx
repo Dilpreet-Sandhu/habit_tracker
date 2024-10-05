@@ -14,6 +14,8 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { motion } from "framer-motion";
+import useAsyncMutation from "@/hooks/useAyncMutation";
+import { useCreatHabitMutation } from "@/redux/slices/apiSlice";
 
 interface habitdata {
   title: string;
@@ -24,7 +26,7 @@ interface habitdata {
 }
 
 export function CreateHabit() {
-  const [loading, setLoading] = useState(false);
+  const [createHabit] = useCreatHabitMutation();
   const [habitData, setHabitData] = useState<habitdata>({
     title: "",
     description: "",
@@ -48,13 +50,14 @@ export function CreateHabit() {
     habitData.reminder = combineDateAndTime(time);
 
     try {
-      const res = await axios.post("/api/habit/methods", habitData);
+      const res = await createHabit(habitData);
 
-      if (res.status == 200) {
-        toast(res.data.message, { type: "success" });
-      } else {
-        toast(res.data.message, { type: "error" });
+      if (res.data.success) {
+        toast(res.data.message,{type : "success"})
+      }else{
+        toast(res.data.message,{type : "error"})
       }
+
     } catch (error) {
       console.log("error while creating habit: ", error);
       toast("error while creating habit", { type: "error" });

@@ -6,15 +6,37 @@ export const apiSlice = createApi({
     baseQuery : fetchBaseQuery({baseUrl : "/api"}),
     tagTypes : ["habits","streaks"],
     endpoints : (builder) => ({
-        getHabits : builder.query<any,void>({
+        getHabits : builder.query<any,void | boolean>({
+            query : (completed) => {
+                let url = "/habit/get";
+                if (completed) url += '?completed=true';
+
+                return {
+                    url :url,
+                    method : "GET"
+                }
+            },
+            providesTags : ["habits"]
+        }),
+        getStreaks : builder.query<any,void>({
             query : () => ({
-                url : "/habit/get",
+                url : "/streak/get",
                 method : "GET"
             }),
-            providesTags : ["habits"]
+            providesTags : ["streaks"]
+        }),
+        creatHabit : builder.mutation<any,any>({
+            query : (habitData) => ({
+                url : "/habit/methods",
+                method : "POST",
+                body : habitData,
+            }),
+            invalidatesTags : ["habits","streaks"]
         })
     })
 
 })
 
-export const {useLazyGetHabitsQuery,useGetHabitsQuery} = apiSlice;
+
+export const {useLazyGetHabitsQuery,useGetHabitsQuery,useCreatHabitMutation,useGetStreaksQuery} = apiSlice;
+export type mutationHookType = ReturnType<typeof useCreatHabitMutation>;
