@@ -15,6 +15,7 @@ export async function POST(request : Request) {
         const {habitId} = await request.json();
 
         const session = await getServerSession(authOptions);
+        console.log(habitId);
 
         if (!session || !session.user) {
             return Response.json(new ApiHandler(false,"you should be logged in to perform this action"),{status:400});
