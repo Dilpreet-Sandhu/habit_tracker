@@ -5,8 +5,7 @@ export interface User extends Document {
     username : string;
     email : string;
     password : string;
-    habits : any[];
-    tags : string[];
+    fcmToken : string;
 }
 
 const userSchema : Schema<User> = new Schema<User>({
@@ -23,15 +22,9 @@ const userSchema : Schema<User> = new Schema<User>({
         type : String,
         required : [true,"password is required"]
     },
-    habits : [{
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "Habit"
-    }],
-    tags : [
-        {
-            type : String
-        }
-    ]
+    fcmToken : {
+        type : String,
+    }
 
 },{timestamps : true});
 

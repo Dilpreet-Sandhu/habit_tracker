@@ -60,6 +60,13 @@ export const apiSlice = createApi({
         };
       },
     }),
+    sendFcmToken : builder.mutation<any,any>({
+      query: (token) => ({
+        url : "/sendfcmtoken",
+        method : "PUT",
+        body : {token}
+      })
+    })
   }),
 });
 
@@ -70,6 +77,7 @@ export const {
   useGetStreaksQuery,
   useDeleteHabitMutation,
   useUpdateHabitMutation,
-  useUpdateProfileInfoMutation
+  useUpdateProfileInfoMutation,
+  useSendFcmTokenMutation
 } = apiSlice;
 export type mutationHookType = ReturnType<typeof useCreatHabitMutation>;

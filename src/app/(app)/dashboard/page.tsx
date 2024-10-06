@@ -1,29 +1,63 @@
 "use client";
-import { useApi } from "@/hooks/useApi";
-import axios from "axios";
-import { UploadIcon } from "lucide-react";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
-import { ArrowUpRight } from "lucide-react";
-import { CreateHabit } from "@/components/models/AnimatedModel";
-import { motion } from "framer-motion";
-import Habits from "@/components/specific/Habits";
-import { useGetStreaksQuery } from "@/redux/slices/apiSlice";
-import { Streak } from "@/models/streak.model";
-import { Skeleton } from "@/components/ui/skeleton";
 import EditDialog from "@/components/dashboard/EditDialog";
+import { CreateHabit } from "@/components/models/AnimatedModel";
+import Habits from "@/components/specific/Habits";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useGetStreaksQuery, useSendFcmTokenMutation } from "@/redux/slices/apiSlice";
 import { useAppSelector } from "@/redux/store";
-
+import { getToken } from "firebase/messaging";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import {messaging} from '@/lib/firebase'
+import { toast } from "react-toastify";
 
 export default function Page() {
 
   const {data,isLoading} = useGetStreaksQuery();
   const streakData = data?.data as any[];
-
+  const [sendToken] = useSendFcmTokenMutation();
 
   const {editDialog} = useAppSelector(state => state.misc);
+
+  async function requestPermission() {
+
+    try {
+
+      const status = await Notification.requestPermission();
+
+      if (status == "granted") {
+
+        console.log("permission granted");
+        
+        const token = await getToken(messaging,{vapidKey : "BPCjkYa32nHQQzNcUwtXI4rGtqaVdqGrn0E2e7Y6YoitEIRVA"});
+
+        if (token)  {
+          console.log("your fcm token: ",token);
+          //send the token to backend
+          const res = await sendToken(token);
+
+          if (res.data.success) {
+            toast(res.data.message,{type : 'success'});
+          }else {
+            toast(res.data.message,{type : "error"});
+          }
+
+        }else{
+          console.log("no registeration token available")
+        }
+
+      }else if (status == "denied") {
+          toast("if you deny permision we won't be able to send you notification for your habits",{type : "warning"});
+      }
+      
+    } catch (error) {
+      console.log("error while requesting permission",error);
+    } 
+
+  }
+  useEffect(() => {
+    requestPermission();
+  },[])
 
   
   
