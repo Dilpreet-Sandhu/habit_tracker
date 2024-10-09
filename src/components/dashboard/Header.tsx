@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import { navLinks } from "@/lib/helper";
-import { BellIcon, Calendar, LogIn, LogOut, ToggleRightIcon, User } from "lucide-react";
+import { BellIcon, Calendar, ChartArea, LogIn, LogOut, MessageCircle, ToggleRightIcon, User } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { setEditDialogOpen } from "@/redux/slices/slice";
+import Link from "next/link";
 
 export default function Header() {
 
@@ -15,13 +16,16 @@ export default function Header() {
     <div className="w-full h-16 border-b-[2px] flex items-center justify-between px-5 border-black">
       <h1 className="text-2xl text-zinc-800 font-bold">Habit Flow</h1>
       <div className="px-3 flex gap-4">
-        <div
+        <Link
+        href="/ai"
           aria-label="theme toggle"
           aria-description="theme toggle"
           className="ml-2 cursor-pointer"
         >
-          <ToggleRightIcon />
-        </div>
+
+          <MessageCircle/>
+
+        </Link>
         <div
           aria-label="notificaiton"
           aria-description="notificaiton"

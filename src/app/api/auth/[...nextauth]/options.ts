@@ -52,6 +52,7 @@ export const authOptions : NextAuthOptions = {
                 token.username = user?.username;
                 token.tags = user?.tags;
                 token.habits = user?.habits;
+                token.fcmToken = user?.fcmToken;
             }
             return token;
         },
@@ -61,6 +62,7 @@ export const authOptions : NextAuthOptions = {
                 session.user.username = token.username as string;
                 session.user.tags = token.tags as string[];
                 session.user.habits = token.habits as any[];
+                session.user.fcmToken = token.fcmToken as string;
                 
             }
             return session;

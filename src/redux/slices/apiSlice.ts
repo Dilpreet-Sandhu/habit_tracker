@@ -66,6 +66,13 @@ export const apiSlice = createApi({
         method : "PUT",
         body : {token}
       })
+    }),
+    sendToAi : builder.mutation<any,any>({
+      query : (prompt) => ({
+        url : "/suggestions",
+        method :"POST",
+        body : {prompt}
+      })
     })
   }),
 });
@@ -78,6 +85,7 @@ export const {
   useDeleteHabitMutation,
   useUpdateHabitMutation,
   useUpdateProfileInfoMutation,
-  useSendFcmTokenMutation
+  useSendFcmTokenMutation,
+  useSendToAiMutation
 } = apiSlice;
 export type mutationHookType = ReturnType<typeof useCreatHabitMutation>;

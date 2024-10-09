@@ -47,7 +47,7 @@ const habitSchema : Schema<Habit> = new Schema<Habit>({
         default : false
     },
   
-});
+},{timestamps:true});
 
 
 export const HabitModel = (models.HabitModel as Model<Habit>) || model<Habit>("HabitModel",habitSchema);

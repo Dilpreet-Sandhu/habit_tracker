@@ -90,6 +90,14 @@ const Habit = ({ habit }: { habit: Habit }) => {
       toast("error while completing habit",{type : "error"})
     }
   }
+
+  const date = new Date(habit.reminder);
+  const ISTOffset = 5 * 60 * 60 * 1000 + 30 * 60 * 1000;
+  const nowInIst = new Date(date.getTime() + ISTOffset);
+  const habitHours = nowInIst.getHours();
+  const habitMinutes = nowInIst.getMinutes();
+  const amOrpm = habitHours > 12 ? 'PM' : 'AM';
+  const habitTime =`${habitHours > 12 ? habitHours -12 : habitHours }:${habitMinutes < 10 ? `0${habitMinutes}` : habitMinutes} ${amOrpm}`;
     
   return (
     <motion.div
@@ -98,11 +106,12 @@ const Habit = ({ habit }: { habit: Habit }) => {
         transition={{delay : 0.4}}
       className={`border-dark ${
         habit.isCompleted == true ? "bg-green-200" : "background"
-      } border-[2px]  px-2 flex rounded-md w-[420px] h-[130px]`}
+      } border-[2px]  px-2 flex rounded-md w-[420px] h-[153px]`}
     >
       <div className="flex-1">
         <h1 className={`${habit.isCompleted == true ? "text-zinc-600 " : "dark-text"} font-bold text-2xl mt-2`}>{habit?.title}</h1>
         <p className="dark-p-text mt-1">{habit?.description}</p>
+        <p className="dark-p-text">starts at : {habitTime}</p>
         <div className="flex mt-4 gap-3">
           <span className="badge">{habit?.frequency}</span>
           <span className="badge">{habit?.difficulty}</span>

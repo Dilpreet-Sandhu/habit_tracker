@@ -101,7 +101,9 @@
    }
    .border-btn {
     @apply  border-black border-[2px] px-5 py-2 rounded-md text-black
-
+   }
+   .head-text {
+    @apply text-2xl text-zinc-800 font-bold
    }
 }
 

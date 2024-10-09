@@ -48,12 +48,38 @@ export const ModalTrigger = ({
   className?: string;
 }) => {
   const { setOpen } = useModal();
+  const [lastScrollY,setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const button = document.getElementById("button");
+  
+
+    window.addEventListener("scroll",(e) => {
+      if (!button) return;
+
+      const scrollY = window.scrollY;
+
+      if (scrollY > lastScrollY) {
+        button.style.marginTop = "200px";
+        button.style.opacity = "0";
+      }else {
+        button.style.marginTop = "0";
+        button.style.opacity = "1";
+      }
+
+      setLastScrollY(scrollY);
+      
+    })
+
+  },[])
+
   return (
     <motion.button
+      id="button"
       initial={{opacity : 0,y : "-40%"}}
       whileInView={{opacity : 1,y : "0%"}}
       className={cn(
-        "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
+        "px-4 py-2 rounded-md  transition-all delay-150 text-black dark:text-white text-center relative overflow-hidden",
         className
       )}
       onClick={() => setOpen(true)}

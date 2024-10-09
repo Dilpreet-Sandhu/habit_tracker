@@ -48,20 +48,26 @@ export function CreateHabit() {
 
   async function handleCreateHabit() {
     habitData.reminder = combineDateAndTime(time);
-
+    console.log(habitData);
+    
     try {
       const res = await createHabit(habitData);
-
+      
       if (res.data.success) {
         toast(res.data.message,{type : "success"})
       }else{
         toast(res.data.message,{type : "error"})
       }
-
+      
     } catch (error) {
       console.log("error while creating habit: ", error);
       toast("error while creating habit", { type: "error" });
     }
+    setHabitData( {title: "",
+    description: "",
+    difficulty: "easy",
+    frequency: "daily",
+    reminder: new Date()});
   }
 
   return (
