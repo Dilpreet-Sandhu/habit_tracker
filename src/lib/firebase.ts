@@ -7,7 +7,7 @@ import { getMessaging } from 'firebase/messaging';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBTBgY9E7sJS-6UYgCqJtn4OrZv4oR6x2c",
+  apiKey: process.env.GOOGLE_API_KEY,
   authDomain: "habittracker-fef2c.firebaseapp.com",
   projectId: "habittracker-fef2c",
   storageBucket: "habittracker-fef2c.appspot.com",
