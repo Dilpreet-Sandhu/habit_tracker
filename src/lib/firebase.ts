@@ -2,12 +2,13 @@
 // Import the functions you need from the SDKs you need
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getMessaging } from 'firebase/messaging';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.GOOGLE_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY ,
   authDomain: "habittracker-fef2c.firebaseapp.com",
   projectId: "habittracker-fef2c",
   storageBucket: "habittracker-fef2c.appspot.com",

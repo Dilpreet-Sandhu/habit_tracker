@@ -66,7 +66,7 @@ export default function Page() {
   useEffect(() => {
     requestPermission();
 
-  });
+  },[]);
 
 
 

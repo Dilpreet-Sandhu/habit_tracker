@@ -71,7 +71,7 @@ export const ModalTrigger = ({
       
     })
 
-  })
+  },[])
 
   return (
     <motion.button
