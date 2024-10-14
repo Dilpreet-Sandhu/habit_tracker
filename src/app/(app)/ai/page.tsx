@@ -61,7 +61,7 @@ const Page = () => {
             {/* //message div */}
             {
                 messages.map((message,idx) => (
-            <div className={`w-fit h-fit py-5  max-w-[700px] px-4 rounded-md text-wrap bg-slate-200 mb-2 ${message.sender == "ai" ? "self-start" : "self-end"}`}>
+            <div key={idx} className={`w-fit h-fit py-5  max-w-[700px] px-4 rounded-md text-wrap bg-slate-200 mb-2 ${message.sender == "ai" ? "self-start" : "self-end"}`}>
                    <p className='dark-p-text'>{message.message}</p>
             </div>
                 ))

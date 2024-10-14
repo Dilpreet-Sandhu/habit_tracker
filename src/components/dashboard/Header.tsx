@@ -1,11 +1,9 @@
 "use client";
-import React from "react";
-import { navLinks } from "@/lib/helper";
-import { BellIcon, Calendar, ChartArea, LogIn, LogOut, MessageCircle, ToggleRightIcon, User } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
-import { useDispatch } from "react-redux";
 import { setEditDialogOpen } from "@/redux/slices/slice";
+import { BellIcon, Calendar, LogOut, MessageCircle, User } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 export default function Header() {
 
@@ -18,8 +16,7 @@ export default function Header() {
       <div className="px-3 flex gap-4">
         <Link
         href="/ai"
-          aria-label="theme toggle"
-          aria-description="theme toggle"
+
           className="ml-2 cursor-pointer"
         >
 

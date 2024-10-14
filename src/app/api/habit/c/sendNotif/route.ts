@@ -6,7 +6,7 @@ import dbConnect from "@/lib/dbConnect";
 import { HabitModel } from "@/models/habit";
 import { getServerSession } from "next-auth";
 
-export async function POST(request : Request) {
+export async function POST() {
 
     await dbConnect();
 
@@ -32,19 +32,7 @@ export async function POST(request : Request) {
             const minutes = habit.reminder.getMinutes();
             const habitTime = `${hours}:${minutes}`;
 
-            if (time == habitTime) {
-                const message = {
-                    notificaiton : {
-                        title : "Habit Reminder",
-                        body : `Time for ${habit.title}`
-                    },
-                    token : habit.user.fcmtoken,
-                };
-
-                messaging
-
-
-            }
+          
 
         })
         

@@ -1,14 +1,12 @@
 "use client";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { Skeleton } from "../ui/skeleton";
-import { Check } from "lucide-react";
 import type { Habit } from "@/models/habit";
 import { motion } from "framer-motion";
+import { Check } from "lucide-react";
+import { toast } from "react-toastify";
+import { Skeleton } from "../ui/skeleton";
 
-import { useDeleteHabitMutation, useGetHabitsQuery, useLazyGetHabitsQuery, useUpdateHabitMutation } from "@/redux/slices/apiSlice";
+import { useDeleteHabitMutation, useGetHabitsQuery, useUpdateHabitMutation } from "@/redux/slices/apiSlice";
 
 export default function Habits() {
   

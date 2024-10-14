@@ -2,12 +2,11 @@ import { ApiHandler } from "@/lib/apiHandler";
 import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import {HabitModel} from '@/models/habit'
 
 
 
 
-export async function GET(request : Request) {
+export async function GET() {
     await dbConnect();
 
     try {

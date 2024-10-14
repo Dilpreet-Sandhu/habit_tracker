@@ -1,5 +1,5 @@
 
-import {BellIcon, Calendar, Settings,ToggleRightIcon, User, User2} from 'lucide-react'
+import { BellIcon, Calendar, Settings, ToggleRightIcon, User } from 'lucide-react'
 
 export const navLinks = [
     {

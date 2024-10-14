@@ -1,7 +1,7 @@
 'use client'
 // Import the functions you need from the SDKs you need
 import { getApp, getApps, initializeApp } from "firebase/app";
-import {getMessaging, isSupported} from 'firebase/messaging'
+import { getMessaging } from 'firebase/messaging';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,4 +20,4 @@ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 const messaging = typeof window !== "undefined" ? getMessaging(app) : null;
 
-export {messaging}
+export { messaging };

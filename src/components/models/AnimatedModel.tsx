@@ -1,5 +1,6 @@
 "use client";
-import axios from "axios";
+import { useCreatHabitMutation } from "@/redux/slices/apiSlice";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -13,9 +14,6 @@ import {
 } from "../ui/animated-modal";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { motion } from "framer-motion";
-import useAsyncMutation from "@/hooks/useAyncMutation";
-import { useCreatHabitMutation } from "@/redux/slices/apiSlice";
 
 interface habitdata {
   title: string;

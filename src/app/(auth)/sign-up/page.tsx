@@ -1,17 +1,17 @@
 'use client'
+import { BottomGradient } from "@/components/BottomGradient";
 import { LabelInputContainer } from "@/components/InputContainer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import {useDebounceCallback} from 'usehooks-ts';
-import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
-import {ArrowBigLeft, ArrowDownRight, ArrowUpNarrowWide, ArrowUpRight, Loader, Loader2, LoaderCircle} from 'lucide-react';
 import { ResponseHandler } from "@/lib/ApiResponseHandler";
-import { toast } from "react-toastify";
+import axios from "axios";
+import { ArrowUpRight, Loader } from 'lucide-react';
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BottomGradient } from "@/components/BottomGradient";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useDebounceCallback } from 'usehooks-ts';
 
 
 export default function Page() {

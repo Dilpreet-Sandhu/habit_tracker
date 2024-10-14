@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import dbConnect from "@/lib/dbConnect";
 import { UserModel } from "@/models/user.model";
 import { NextAuthOptions } from "next-auth";
@@ -51,7 +52,6 @@ export const authOptions : NextAuthOptions = {
                 token._id = user?._id.toString();
                 token.username = user?.username;
                 token.tags = user?.tags;
-                token.habits = user?.habits;
                 token.fcmToken = user?.fcmToken;
             }
             return token;
@@ -61,7 +61,6 @@ export const authOptions : NextAuthOptions = {
                 session.user._id = token._id as string;
                 session.user.username = token.username as string;
                 session.user.tags = token.tags as string[];
-                session.user.habits = token.habits as any[];
                 session.user.fcmToken = token.fcmToken as string;
                 
             }

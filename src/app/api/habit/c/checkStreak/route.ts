@@ -6,7 +6,7 @@ import { StreakModel } from "@/models/streak.model";
 import { getServerSession } from "next-auth";
 
 
-export async function POST(request : Request) {
+export async function POST() {
     await dbConnect();
     try {
         const session = await getServerSession(authOptions);
@@ -28,7 +28,7 @@ export async function POST(request : Request) {
 
       habits.forEach(async (habit) => {
         if (habit.lastUpdated < yesterday) {
-          const streak = await StreakModel.deleteOne({
+           await StreakModel.deleteOne({
             habit: habit._id,
             user: session.user._id,
           });

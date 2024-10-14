@@ -1,4 +1,5 @@
 "use client";
+import { useUpdateProfileInfoMutation } from "@/redux/slices/apiSlice";
 import {
   setEditDialogClose,
   setPasswordEditFalse,
@@ -6,16 +7,15 @@ import {
   setUsernameEditFalse,
   setUsernameEditTrue,
 } from "@/redux/slices/slice";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Label } from "../ui/label";
 import { useAppSelector } from "@/redux/store";
-import { Input } from "../ui/input";
-import { signIn, useSession } from "next-auth/react";
-import { Check, Edit } from "lucide-react";
-import { useUpdateProfileInfoMutation } from "@/redux/slices/apiSlice";
-import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { Check, Edit } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 export default function EditDialog() {
   const dispatch = useDispatch();

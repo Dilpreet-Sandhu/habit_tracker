@@ -54,7 +54,7 @@ export const ModalTrigger = ({
     const button = document.getElementById("button");
   
 
-    window.addEventListener("scroll",(e) => {
+    window.addEventListener("scroll",() => {
       if (!button) return;
 
       const scrollY = window.scrollY;
@@ -71,7 +71,7 @@ export const ModalTrigger = ({
       
     })
 
-  },[])
+  })
 
   return (
     <motion.button

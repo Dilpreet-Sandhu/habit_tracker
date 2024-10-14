@@ -1,3 +1,4 @@
+/*eslint-disable no-console*/
 "use client";
 import EditDialog from "@/components/dashboard/EditDialog";
 import { CreateHabit } from "@/components/models/AnimatedModel";
@@ -65,7 +66,7 @@ export default function Page() {
   useEffect(() => {
     requestPermission();
 
-  }, []);
+  });
 
 
 

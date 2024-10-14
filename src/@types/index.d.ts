@@ -6,7 +6,6 @@ declare module "next-auth" {
         _id : string;
         username : string;
         tags : string[];
-        habits : any[];
         fcmToken : string;
     }
 
@@ -15,7 +14,6 @@ declare module "next-auth" {
             _id : string;
             username : string;
             tags : string[];
-            habits : any[];
             fcmToken : string;
         } & DefaultSession["user"]
     }
