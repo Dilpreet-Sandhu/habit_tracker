@@ -73,7 +73,7 @@ export default function Page() {
   
 
   return (
-    <main className="w-full px-20  min-h-[91vh] max-h-fit ">
+    <main className="w-full md:px-20 max-md:px-4  min-h-[91vh] max-h-fit ">
       <div className="w-full h-20 py-2">
         <h1 className="bold-text">Your streaks</h1>
 
@@ -89,7 +89,7 @@ export default function Page() {
                 whileInView={{ opacity: 1, x: "0" }}
                 transition={{ delay: idx * 0.1 }}
                 key={idx}
-                className="bg-zinc-500 border-black border-[2px] w-[14vw] h-[10vh] flex flex-shrink-0 items-center mt-4 rounded-md justify-start px-2"
+                className="bg-zinc-500 border-black border-[2px] w-[170px] h-[80px] flex flex-shrink-0 items-center mt-4 rounded-md justify-start px-2"
               >
                 <div className="flex flex-1 flex-col">
                   <p className="text-white text-[1.3vw] text-nowrap font-semibold mb-1 ">

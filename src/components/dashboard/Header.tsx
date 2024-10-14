@@ -23,7 +23,7 @@ export default function Header() {
           <MessageCircle/>
 
         </Link>
-        <div
+        {/* <div
           aria-label="notificaiton"
           aria-description="notificaiton"
           className="ml-2 cursor-pointer"
@@ -36,7 +36,7 @@ export default function Header() {
           className="ml-2 cursor-pointer"
         >
           <Calendar />
-        </div>
+        </div> */}
         <div
           aria-label="user"
           aria-description="user"
