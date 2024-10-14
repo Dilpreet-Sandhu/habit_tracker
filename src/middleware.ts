@@ -12,7 +12,7 @@ export async function middleware(request : NextRequest) {
    const parsedCookies = parse(cookies || "");
 
    const authToken = parsedCookies['next-auth.session-token'] || parsedCookies['__Secure-next-auth.session-token'];
-   console.log("authToken" + authToken);
+   
     const url = request.nextUrl;
 
     if (authToken && (
