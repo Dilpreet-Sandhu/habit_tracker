@@ -83,7 +83,7 @@ export default function Page() {
           id="streaks"
         >
           {!isLoading ? (
-            streakData.map((streak, idx) => (
+            streakData?.map((streak, idx) => (
               <motion.div
                 initial={{ opacity: 0, x: "-40%" }}
                 whileInView={{ opacity: 1, x: "0" }}
